@@ -1,0 +1,160 @@
+/* General Styles */
+body {
+    background-color: rgb(46, 44, 44);
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header {
+    background-color: black;
+    color: rgb(245, 191, 191);
+    display: flex;
+    justify-content: space-between; 
+    padding: 15px;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin-left: 90px;
+}
+
+.logo img {
+    width: auto;
+    height: auto;
+}
+
+#hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block; 
+    margin-right: 90px;  
+}
+
+
+
+/* ----------- Desktop Styles ----------- */
+.menubar {
+    display: flex;
+    gap: 20px;
+}
+
+.menuItem {
+    display: flex;
+    margin-top: 11px;
+    gap: 20px;
+}
+
+.menuItem a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.menuItem a:hover {
+    color: #ff9900;
+}
+
+
+
+/* ----------- Tablet Styles (max-width: 1024px) ----------- */
+@media screen and (max-width: 1024px) {
+    .logo {
+        margin-left: 40px;
+    }
+
+    /* Initially hide the menu items */
+    .menuItem {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    /* Sidebar menu positioning */
+    .menuItem.show {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.8); 
+        width: 250px; 
+        height: 100%;
+        padding: 0px;
+        z-index: 100;
+        box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .menuItem a {
+        font-size: 16px;
+        margin: 20px 0;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .menuItem a:hover {
+        color: #ff9900;
+    }
+
+   
+    #hamburger {
+        margin-left: auto; 
+        margin-right: 10px; 
+    }
+}
+
+
+
+/* ----------- Mobile Styles (max-width: 768px) ----------- */
+@media screen and (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo {
+        margin-left: 20px; 
+    }
+
+    .menuItem {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+    .menuItem.show {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9); 
+        width: 200px; 
+        height: 100%;
+        padding: 0px;
+        z-index: 100;
+        box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.5);
+    }
+
+    .menuItem a {
+        font-size: 18px; 
+        margin: 25px 0; 
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .menuItem a:hover {
+        color: #ff9900;
+    }
+
+    /* Separate styles for the hamburger icon on mobile */
+    #hamburger {
+        margin-left: auto; 
+        margin-right: 15px;
+    }
+}

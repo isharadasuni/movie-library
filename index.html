@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Logoipsum</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+
+    <!-- Section - Header -->
+    <header id="app">
+        <div class="logo">
+            <img src="Assets/Logos/LogoWhite.svg" alt="logo" />
+        </div>
+
+        <!-- Nav menu -->
+         <div class="menubar">
+        <nav id="menu" class="menuItem" :class="{ 'show': menuVisible }">
+            <a href="#home">HOME</a>
+            <a href="#ourScreens">OUR SCREENS</a>
+            <a href="#schedule">SCHEDULE</a>
+            <a href="#movieLibrary">MOVIE LIBRARY</a>
+            <a href="#location">LOCATION & CONTACT</a>
+        </nav>
+
+        <!-- Hamburger icon for mobile/tablet -->
+        <button id="hamburger" @click="toggleMenu" >
+            <img src="Assets/Icons/MenuWhite.svg" alt="menu image" />
+        </button>
+    </div>
+    </header>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    menuVisible: false,
+                    isMobileOrTablet: false
+                };
+            },
+            methods: {
+                toggleMenu() {
+                    this.menuVisible = !this.menuVisible;
+                },
+                checkScreenSize() {
+                    this.isMobileOrTablet = window.innerWidth <= 1024; // Tablet and Mobile
+                }
+            },
+            mounted() {
+                this.checkScreenSize();
+                window.addEventListener('resize', this.checkScreenSize); // Listen for window resize
+            },
+            beforeUnmount() {
+                window.removeEventListener('resize', this.checkScreenSize);
+            }
+        });
+
+        app.mount('#app');
+    </script>
+
+</body>
+
+</html>
