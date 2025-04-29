@@ -2,51 +2,68 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logoipsum</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/vue@3"></script>
-    <script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logoipsum</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue@3"></script>
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
 </head>
 
 <body>
 
-    <!-- Section - Header -->
-    <header id="navbar-script">
-        <div class="logo">
-            <img src="Assets/Logos/LogoWhite.svg" alt="logo" />
-        </div>
+  <!-- Section - Header -->
+  <header id="navbarScript">
+    <div class="logo">
+      <img src="Assets/Logos/LogoWhite.svg" alt="logo" />
+    </div>
 
-        <div class="menubar">
-            <nav class="menuItem visibleMenu">
-                <a href="#home" v-if="!isMobile">HOME</a>
-                <a href="#ourScreens" v-if="!isMobile">OUR SCREENS</a>
-                <a href="#schedule" v-if="!isMobile">SCHEDULE</a>
-                <a href="#movieLibrary" v-if="isDesktop">MOVIE LIBRARY</a>
-                <a href="#location" v-if="isDesktop">LOCATION & CONTACT</a>
-            </nav>
+    <div class="menubar">
+      <nav class="menuItem visibleMenu">
+        <a href="#navbarScript" v-if="!isMobile">HOME</a>
+        <a href="#creativeApp" v-if="!isMobile">OUR SCREENS</a>
+        <a href="#schedule" v-if="!isMobile">SCHEDULE</a>
+        <a href="#movieLibrary" v-if="isDesktop">MOVIE LIBRARY</a>
+        <a href="#location" v-if="isDesktop">LOCATION & CONTACT</a>
+      </nav>
 
-            <nav class="menuItem sidebarMenu" :class="{ 'show': menuVisible }" v-if="!isDesktop">
-                <button id="closeBtn" @click="toggleMenu">
-                    <img src="Assets/Icons/CloseWhite.svg" alt="close button image" />
-                </button>
+      <nav class="menuItem sidebarMenu" :class="{ 'show': menuVisible }" v-if="!isDesktop">
+        <button id="closeBtn" @click="toggleMenu">
+          <img src="Assets/Icons/CloseWhite.svg" alt="close button image" />
+        </button>
 
-                <template v-if="isMobile">
-                    <a href="#home">HOME</a>
-                    <a href="#ourScreens">OUR SCREENS</a>
-                    <a href="#schedule">SCHEDULE</a>
-                </template>
+        <template v-if="isMobile">
+          <a href="#home">HOME</a>
+          <a href="#ourScreens">OUR SCREENS</a>
+          <a href="#schedule">SCHEDULE</a>
+        </template>
 
-                <a href="#movieLibrary" v-if="isTablet || isMobile">MOVIE LIBRARY</a>
-                <a href="#location" v-if="isTablet || isMobile">LOCATION & CONTACT</a>
-            </nav>
-          
-            <button id="hamburger" @click="toggleMenu" v-if="!isDesktop || isDesktop">
-                <img src="Assets/Icons/MenuWhite.svg" alt="menu image" />
-            </button>
-        </div>
-    </header>
+        <a href="#movieLibrary" v-if="isTablet || isMobile">MOVIE LIBRARY</a>
+        <a href="#location" v-if="isTablet || isMobile">LOCATION & CONTACT</a>
+      </nav>
+
+      <button id="hamburger" @click="toggleMenu" v-if="!isDesktop || isDesktop">
+        <img src="Assets/Icons/MenuWhite.svg" alt="menu image" />
+      </button>
+    </div>
+  </header>
+
+  <!-- Section - MainVisual -->
+  <div id="creativeApp" class="mainVisual">
+    <div class="media-container">
+      <transition name="fade">
+        <img v-if="currentSlide.type === 'image'" :src="currentSlide.src" :alt="currentSlide.alt" class="media-img" key="img" />
+      </transition>
+
+      <transition name="fade">
+        <video v-else ref="video" :src="currentSlide.src" class="media-video" autoplay muted loop key="vid"></video>
+      </transition>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 
 </body>
 

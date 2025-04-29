@@ -12,14 +12,18 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    position: relative;
     flex-wrap: wrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    margin-inline-start: 90px; 
+    margin-inline-start: 90px;
 }
 
 .logo img {
@@ -30,8 +34,8 @@ header {
 .menubar {
     display: flex;
     align-items: center;
-    margin-inline-end: 90px; 
-    margin-inline-start: auto; 
+    margin-inline-end: 90px;
+    margin-inline-start: auto;
     gap: 20px;
 }
 
@@ -40,6 +44,48 @@ header {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+.mainVisual {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;  
+}
+
+.media-img {
+    width: 100%;
+    height: auto;
+    transform: translateY(-300px);
+    display: block;
+}
+
+.media-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.media-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+    opacity: 1;
 }
 
 /* ----------- Inline Menu (Desktop and Tablet) ----------- */
@@ -53,7 +99,7 @@ header {
     text-decoration: none;
     font-size: 14px;
     transition: color 0.3s;
-    text-align: start; 
+    text-align: start;
 }
 
 .visibleMenu a:hover {
@@ -67,7 +113,7 @@ header {
     align-items: flex-start;
     position: fixed;
     top: 0;
-    inset-inline-end: 0; 
+    inset-inline-end: 0;
     background-color: rgb(0, 0, 0);
     width: 250px;
     height: 100%;
@@ -84,12 +130,12 @@ header {
     font-size: 16px;
     color: white;
     text-decoration: none;
-    text-align: start; 
-    padding-inline-start: 15px; 
+    text-align: start;
+    padding-inline-start: 15px;
     display: block;
     width: 210px;
     padding: 15px 15px;
-    margin-inline-start: 10px; 
+    margin-inline-start: 10px;
 }
 
 .sidebarMenu a:hover {
@@ -101,7 +147,7 @@ header {
     border: none;
     cursor: pointer;
     align-self: flex-end;
-    margin-inline-end: 50px; 
+    margin-inline-end: 50px;
     margin-bottom: 20px;
     margin-top: -20px;
 }
@@ -109,12 +155,12 @@ header {
 /* ----------- Tablet Styles (769px–1024px) ----------- */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     .logo {
-        margin-inline-start: 40px; 
+        margin-inline-start: 40px;
     }
 
     #hamburger {
         display: block;
-        margin-inline-start: 10px; 
+        margin-inline-end: 40px;
     }
 
     .visibleMenu {
@@ -126,15 +172,36 @@ header {
     }
 
     .menubar {
-        margin-inline-end: 10px; 
+        margin-inline-end: 10px;
     }
 
     .sidebarMenu {
         display: none;
         width: auto;
     }
+
     .sidebarMenu.show {
         display: flex;
+    }
+
+    .media-container {
+        height: 100vh;
+    }
+
+    .media-img {
+        width: 100%;
+        height: 60vh;
+        object-fit: cover;
+        display: block;
+    }
+
+    .media-video {
+        width: 100%;
+        height: 40vh;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }
 
@@ -146,11 +213,12 @@ header {
     }
 
     .logo {
-        margin-inline-start: 20px; 
+        margin-inline-start: 20px;
+        
     }
 
     .menubar {
-        margin-inline-end: 20px; 
+        margin-inline-end: 20px;
     }
 
     .visibleMenu {
@@ -159,7 +227,7 @@ header {
 
     #hamburger {
         display: block;
-        margin-inline-end: 15px; 
+        margin-inline-end: 15px;
     }
 
     .sidebarMenu {
@@ -168,6 +236,17 @@ header {
 
     .sidebarMenu a {
         font-size: 18px;
-        margin-inline-start: 10px; 
+        margin-inline-start: 10px;
+    }
+
+    .media-container {
+        height: 100vh;
+    }
+
+    .media-img {
+        width: 100%;
+        height: 160vh;
+        object-fit: cover;
+        display: block;
     }
 }

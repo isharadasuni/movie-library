@@ -1,5 +1,5 @@
 // hamburger toggle event
-const app = Vue.createApp({
+const navbarScript = Vue.createApp({
     data() {
       return {
         menuVisible: false,
@@ -27,4 +27,45 @@ const app = Vue.createApp({
       window.removeEventListener('resize', this.checkScreenSize);
     }
   });
-  app.mount('#navbar-script');
+  navbarScript.mount('#navbarScript');
+
+
+  //slide show 
+  const creativeApp = Vue.createApp({
+    data() {
+      return {
+        slides: [
+          { type: 'image', src: 'Assets/Images/HeaderImage.jpg', alt: 'header image' },
+          { type: 'video', src: 'Assets/Videos/HeaderVideo.mp4' }
+        ],
+        currentIndex: 0
+      };
+    },
+    computed: {
+      currentSlide() {
+        return this.slides[this.currentIndex];
+      }
+    },
+    mounted() {
+      this.startLoop();
+    },
+    methods: {
+      async startLoop() {
+        while (true) {
+          // Show image for a few seconds
+          this.currentIndex = 0;
+          await this.$nextTick();
+          await this.wait(4000); 
+  
+          // Show video
+          this.currentIndex = 1;
+          await this.$nextTick();
+          await this.wait(9000); 
+        }
+      },
+      wait(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+    }
+  });
+  creativeApp.mount('#creativeApp');
