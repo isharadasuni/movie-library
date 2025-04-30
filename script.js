@@ -69,3 +69,73 @@ const navbarScript = Vue.createApp({
     }
   });
   creativeApp.mount('#creativeApp');
+
+
+//movie
+const { createApp } = Vue;
+createApp({
+  data() {
+    return {
+      query: '',
+      searchResults: [],
+      selectedGrid: [],
+      dropdownVisible: false
+    };
+  },
+  methods: {
+    async searchShows() {
+      if (this.query.length < 2) {
+        this.searchResults = [];
+        this.dropdownVisible = false;
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(this.query)}`);
+        const data = await response.json();
+        this.searchResults = data.map(item => item.show);
+        this.dropdownVisible = true;
+      } catch (error) {
+        console.error('TVmaze API error:', error);
+        this.searchResults = [];
+        this.dropdownVisible = false;
+      }
+    },
+    addToSelected(show) {
+      const alreadyAdded = this.selectedGrid.some(s => s.id === show.id);
+      if (!alreadyAdded) {
+        this.selectedGrid.push(show);
+      }
+      this.query = '';
+      this.searchResults = [];
+      this.dropdownVisible = false;
+    },
+    removeFromGrid(index) {
+      this.selectedGrid.splice(index, 1);
+    },
+    hideDropdown() {
+      this.dropdownVisible = false;
+    }
+  },
+  directives: {
+    outside: {
+      mounted(el, binding) {
+        el.clickOutsideEvent = function (event) {
+          if (!(el === event.target || el.contains(event.target))) {
+            binding.value(event);
+          }
+        };
+        document.body.addEventListener("click", el.clickOutsideEvent);
+      },
+      unmounted(el) {
+        document.body.removeEventListener("click", el.clickOutsideEvent);
+      }
+    }
+  }
+}).mount('#app');
+
+
+
+
+
+
